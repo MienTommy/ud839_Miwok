@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,8 +25,9 @@ public class WordAdapter extends ArrayAdapter<Word>
         // going to use this second argument, so it can be any value. Here, we used 0.
         super(context, 0, words);
     }
-    /* Position is the position of the View, convertView is the recycled
-    View (can be empty), parent is the ViewGrouop which is the ListView */
+
+    /* These are all passed by ListView. Position is the position number of the View, convertView
+    is the recycled View (can be empty), parent is the ViewGroup which is the ListView */
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
@@ -51,6 +53,11 @@ public class WordAdapter extends ArrayAdapter<Word>
         TextView defaultTextView = (TextView) listItemView.findViewById(R.id.default_text_view);
         defaultTextView.setText(currentWord.getmDefaultTranslation());
 
+        //Find ImageView in list_item.xml layout with resource ID and set it to the image displayed
+        ImageView wordImageView = (ImageView) listItemView.findViewById(R.id.image_icon);
+        wordImageView.setImageResource(currentWord.getImageResourceId());
+
+        //Return the whole list item layout containing the views so it can be shown in ListView
         return listItemView;
     }
 }
